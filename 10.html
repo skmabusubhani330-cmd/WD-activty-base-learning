@@ -1,0 +1,1287 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DreamHomes - Property Website</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #263238;
+        }
+
+        /* Navigation */
+        nav {
+            background: #16324f;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav h1 {
+            font-size: 27px;
+            color: #64dfdf;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 18px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #64dfdf;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 390px;
+            padding: 70px 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            flex-wrap: wrap;
+            background: linear-gradient(120deg, #dbeafe, #b8e0f2);
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 260px;
+        }
+
+        .hero h2 {
+            font-size: 43px;
+            color: #16324f;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 22px;
+        }
+
+        .hero img {
+            width: 390px;
+            max-width: 100%;
+            height: 270px;
+            object-fit: cover;
+            border-radius: 18px;
+            box-shadow: 0 8px 20px #16324f30;
+        }
+
+        .btn {
+            background: #087e8b;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #065b65;
+        }
+
+        /* Search Filters */
+        .search-section {
+            margin: 30px 7%;
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px #16324f12;
+        }
+
+        .search-section h2 {
+            color: #16324f;
+            margin-bottom: 20px;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(160px, 1fr)
+            );
+            gap: 15px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            background: white;
+            font-size: 14px;
+        }
+
+        .filter-buttons {
+            margin-top: 18px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .reset-btn {
+            background: #e5e7eb;
+            color: #263238;
+        }
+
+        .reset-btn:hover {
+            background: #cbd5e1;
+        }
+
+        /* Sections */
+        section {
+            padding: 35px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            color: #16324f;
+            margin-bottom: 12px;
+        }
+
+        .section-description {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        #resultCount {
+            margin-bottom: 20px;
+            color: #087e8b;
+            font-weight: bold;
+        }
+
+        /* Property Cards */
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(270px, 1fr)
+            );
+            gap: 25px;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px #16324f12;
+            transition: transform 0.3s;
+        }
+
+        .property-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .property-card img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+        }
+
+        .property-info {
+            padding: 20px;
+        }
+
+        .property-info h3 {
+            color: #16324f;
+            margin-bottom: 10px;
+        }
+
+        .location {
+            color: #64748b;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .property-price {
+            font-size: 22px;
+            color: #087e8b;
+            font-weight: bold;
+            margin-bottom: 14px;
+        }
+
+        .property-details {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #16324f;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .amenities {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .card-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .card-buttons button {
+            flex: 1;
+        }
+
+        .compare-btn {
+            background: #e5e7eb;
+            color: #263238;
+        }
+
+        .compare-btn:hover {
+            background: #cbd5e1;
+        }
+
+        .favorite-btn {
+            background: #fce7f3;
+            color: #be185d;
+        }
+
+        .favorite-btn:hover {
+            background: #fbcfe8;
+        }
+
+        /* Comparison Table */
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #16324f12;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+        }
+
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
+        }
+
+        th {
+            background: #16324f;
+            color: white;
+        }
+
+        tr:hover td {
+            background: #f1f5f9;
+        }
+
+        /* Property Details Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #0009;
+            z-index: 10;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 550px;
+            margin: 40px auto;
+            padding: 25px;
+            border-radius: 14px;
+            position: relative;
+        }
+
+        .modal-content h2 {
+            color: #16324f;
+            margin-bottom: 15px;
+        }
+
+        .modal-content p {
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 18px;
+            top: 15px;
+            border: none;
+            background: none;
+            font-size: 27px;
+            cursor: pointer;
+        }
+
+        /* Contact */
+        .contact {
+            background: #dbeafe;
+            text-align: center;
+        }
+
+        .contact p {
+            line-height: 2;
+        }
+
+        footer {
+            background: #16324f;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            line-height: 1.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            nav {
+                justify-content: center;
+                text-align: center;
+            }
+
+            nav h1 {
+                width: 100%;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 7px;
+            }
+
+            .hero {
+                text-align: center;
+                justify-content: center;
+                padding: 45px 6%;
+            }
+
+            .hero h2 {
+                font-size: 33px;
+            }
+
+            .hero img {
+                height: 220px;
+            }
+
+            .property-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-section {
+                margin: 20px 5%;
+            }
+
+            .section-title {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <h1>🏡 DreamHomes</h1>
+
+        <div>
+            <a href="#home">Home</a>
+            <a href="#properties">Properties</a>
+            <a href="#comparison">Compare</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+
+        <div class="hero-content">
+            <h2>Find Your Dream Property</h2>
+
+            <p>
+                Discover beautiful houses, modern apartments,
+                and affordable rental properties in your
+                favourite locations.
+            </p>
+
+            <a href="#search" class="btn">Explore Properties</a>
+        </div>
+
+        <img
+            src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800"
+            alt="Beautiful modern house">
+    </header>
+
+    <!-- Search Filters -->
+    <div class="search-section" id="search">
+
+        <h2>🔎 Find Your Perfect Property</h2>
+
+        <div class="filter-grid">
+
+            <div class="filter-group">
+                <label for="searchLocation">Location</label>
+
+                <input
+                    type="text"
+                    id="searchLocation"
+                    placeholder="Enter city or area">
+            </div>
+
+            <div class="filter-group">
+                <label for="propertyType">Property Type</label>
+
+                <select id="propertyType">
+                    <option value="all">All Properties</option>
+                    <option value="house">House</option>
+                    <option value="apartment">Apartment</option>
+                    <option value="rental">Rental</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="minPrice">Minimum Price (₹)</label>
+
+                <input
+                    type="number"
+                    id="minPrice"
+                    placeholder="Minimum budget"
+                    min="0">
+            </div>
+
+            <div class="filter-group">
+                <label for="maxPrice">Maximum Price (₹)</label>
+
+                <input
+                    type="number"
+                    id="maxPrice"
+                    placeholder="Maximum budget"
+                    min="0">
+            </div>
+
+            <div class="filter-group">
+                <label for="bedrooms">Bedrooms</label>
+
+                <select id="bedrooms">
+                    <option value="all">Any</option>
+                    <option value="1">1+ Bedroom</option>
+                    <option value="2">2+ Bedrooms</option>
+                    <option value="3">3+ Bedrooms</option>
+                    <option value="4">4+ Bedrooms</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="filter-buttons">
+            <button class="btn" onclick="filterProperties()">
+                Search Properties
+            </button>
+
+            <button class="btn reset-btn" onclick="resetFilters()">
+                Reset Filters
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Property Listings -->
+    <section id="properties">
+
+        <h2 class="section-title">Explore Our Properties</h2>
+
+        <p class="section-description">
+            Browse property details, compare prices,
+            and discover the right home for your needs.
+        </p>
+
+        <p id="resultCount">Showing all properties</p>
+
+        <div class="property-grid" id="propertyGrid">
+
+            <!-- Property 1 -->
+            <article class="property-card"
+                data-id="1"
+                data-type="house"
+                data-price="8500000"
+                data-location="vijayawada benz circle"
+                data-bedrooms="3">
+
+                <img
+                    src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600"
+                    alt="Luxury independent house">
+
+                <div class="property-info">
+
+                    <span class="tag">FOR SALE · HOUSE</span>
+
+                    <h3>Luxury Independent House</h3>
+
+                    <p class="location">
+                        📍 Benz Circle, Vijayawada
+                    </p>
+
+                    <p class="property-price">₹85,00,000</p>
+
+                    <div class="property-details">
+                        <span>🛏️ 3 Bedrooms</span>
+                        <span>🚿 3 Bathrooms</span>
+                        <span>📐 2,000 sq.ft.</span>
+                    </div>
+
+                    <p class="amenities">
+                        ✨ Parking · Garden · Balcony · Security
+                    </p>
+
+                    <div class="card-buttons">
+                        <button class="btn"
+                            onclick="showDetails(1)">
+                            View Details
+                        </button>
+
+                        <button class="btn compare-btn"
+                            onclick="toggleCompare(1)">
+                            Compare
+                        </button>
+
+                        <button class="btn favorite-btn"
+                            onclick="toggleFavorite(1, this)">
+                            ♡
+                        </button>
+                    </div>
+
+                </div>
+            </article>
+
+            <!-- Property 2 -->
+            <article class="property-card"
+                data-id="2"
+                data-type="apartment"
+                data-price="6200000"
+                data-location="guntur brodipet"
+                data-bedrooms="3">
+
+                <img
+                    src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600"
+                    alt="Modern apartment">
+
+                <div class="property-info">
+
+                    <span class="tag">FOR SALE · APARTMENT</span>
+
+                    <h3>Modern Family Apartment</h3>
+
+                    <p class="location">
+                        📍 Brodipet, Guntur
+                    </p>
+
+                    <p class="property-price">₹62,00,000</p>
+
+                    <div class="property-details">
+                        <span>🛏️ 3 Bedrooms</span>
+                        <span>🚿 2 Bathrooms</span>
+                        <span>📐 1,500 sq.ft.</span>
+                    </div>
+
+                    <p class="amenities">
+                        ✨ Lift · Gym · Parking · Security
+                    </p>
+
+                    <div class="card-buttons">
+                        <button class="btn"
+                            onclick="showDetails(2)">
+                            View Details
+                        </button>
+
+                        <button class="btn compare-btn"
+                            onclick="toggleCompare(2)">
+                            Compare
+                        </button>
+
+                        <button class="btn favorite-btn"
+                            onclick="toggleFavorite(2, this)">
+                            ♡
+                        </button>
+                    </div>
+
+                </div>
+            </article>
+
+            <!-- Property 3 -->
+            <article class="property-card"
+                data-id="3"
+                data-type="rental"
+                data-price="18000"
+                data-location="vijayawada patamata"
+                data-bedrooms="2">
+
+                <img
+                    src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600"
+                    alt="Apartment available for rent">
+
+                <div class="property-info">
+
+                    <span class="tag">FOR RENT · APARTMENT</span>
+
+                    <h3>Comfortable City Apartment</h3>
+
+                    <p class="location">
+                        📍 Patamata, Vijayawada
+                    </p>
+
+                    <p class="property-price">₹18,000/month</p>
+
+                    <div class="property-details">
+                        <span>🛏️ 2 Bedrooms</span>
+                        <span>🚿 2 Bathrooms</span>
+                        <span>📐 1,100 sq.ft.</span>
+                    </div>
+
+                    <p class="amenities">
+                        ✨ Furnished · Balcony · Water · Parking
+                    </p>
+
+                    <div class="card-buttons">
+                        <button class="btn"
+                            onclick="showDetails(3)">
+                            View Details
+                        </button>
+
+                        <button class="btn compare-btn"
+                            onclick="toggleCompare(3)">
+                            Compare
+                        </button>
+
+                        <button class="btn favorite-btn"
+                            onclick="toggleFavorite(3, this)">
+                            ♡
+                        </button>
+                    </div>
+
+                </div>
+            </article>
+
+            <!-- Property 4 -->
+            <article class="property-card"
+                data-id="4"
+                data-type="house"
+                data-price="12500000"
+                data-location="vijayawada kanuru"
+                data-bedrooms="4">
+
+                <img
+                    src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600"
+                    alt="Spacious premium house">
+
+                <div class="property-info">
+
+                    <span class="tag">FOR SALE · HOUSE</span>
+
+                    <h3>Premium Family Villa</h3>
+
+                    <p class="location">
+                        📍 Kanuru, Vijayawada
+                    </p>
+
+                    <p class="property-price">₹1,25,00,000</p>
+
+                    <div class="property-details">
+                        <span>🛏️ 4 Bedrooms</span>
+                        <span>🚿 4 Bathrooms</span>
+                        <span>📐 2,800 sq.ft.</span>
+                    </div>
+
+                    <p class="amenities">
+                        ✨ Garden · Parking · Terrace · Security
+                    </p>
+
+                    <div class="card-buttons">
+                        <button class="btn"
+                            onclick="showDetails(4)">
+                            View Details
+                        </button>
+
+                        <button class="btn compare-btn"
+                            onclick="toggleCompare(4)">
+                            Compare
+                        </button>
+
+                        <button class="btn favorite-btn"
+                            onclick="toggleFavorite(4, this)">
+                            ♡
+                        </button>
+                    </div>
+
+                </div>
+            </article>
+
+            <!-- Property 5 -->
+            <article class="property-card"
+                data-id="5"
+                data-type="rental"
+                data-price="12000"
+                data-location="guntur arundelpet"
+                data-bedrooms="1">
+
+                <img
+                    src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600"
+                    alt="Small rental apartment">
+
+                <div class="property-info">
+
+                    <span class="tag">FOR RENT · APARTMENT</span>
+
+                    <h3>Compact Studio Apartment</h3>
+
+                    <p class="location">
+                        📍 Arundelpet, Guntur
+                    </p>
+
+                    <p class="property-price">₹12,000/month</p>
+
+                    <div class="property-details">
+                        <span>🛏️ 1 Bedroom</span>
+                        <span>🚿 1 Bathroom</span>
+                        <span>📐 650 sq.ft.</span>
+                    </div>
+
+                    <p class="amenities">
+                        ✨ Furnished · Wi-Fi · Security
+                    </p>
+
+                    <div class="card-buttons">
+                        <button class="btn"
+                            onclick="showDetails(5)">
+                            View Details
+                        </button>
+
+                        <button class="btn compare-btn"
+                            onclick="toggleCompare(5)">
+                            Compare
+                        </button>
+
+                        <button class="btn favorite-btn"
+                            onclick="toggleFavorite(5, this)">
+                            ♡
+                        </button>
+                    </div>
+
+                </div>
+            </article>
+
+            <!-- Property 6 -->
+            <article class="property-card"
+                data-id="6"
+                data-type="apartment"
+                data-price="4500000"
+                data-location="vijayawada poranki"
+                data-bedrooms="2">
+
+                <img
+                    src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=600"
+                    alt="Contemporary apartment">
+
+                <div class="property-info">
+
+                    <span class="tag">FOR SALE · APARTMENT</span>
+
+                    <h3>Contemporary City Apartment</h3>
+
+                    <p class="location">
+                        📍 Poranki, Vijayawada
+                    </p>
+
+                    <p class="property-price">₹45,00,000</p>
+
+                    <div class="property-details">
+                        <span>🛏️ 2 Bedrooms</span>
+                        <span>🚿 2 Bathrooms</span>
+                        <span>📐 1,200 sq.ft.</span>
+                    </div>
+
+                    <p class="amenities">
+                        ✨ Lift · Balcony · Parking · CCTV
+                    </p>
+
+                    <div class="card-buttons">
+                        <button class="btn"
+                            onclick="showDetails(6)">
+                            View Details
+                        </button>
+
+                        <button class="btn compare-btn"
+                            onclick="toggleCompare(6)">
+                            Compare
+                        </button>
+
+                        <button class="btn favorite-btn"
+                            onclick="toggleFavorite(6, this)">
+                            ♡
+                        </button>
+                    </div>
+
+                </div>
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- Property Comparison -->
+    <section id="comparison">
+
+        <h2 class="section-title">Compare Properties</h2>
+
+        <p class="section-description">
+            Select properties using the Compare buttons
+            to compare prices, locations, and amenities.
+        </p>
+
+        <div class="table-container">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Location</th>
+                        <th>Type</th>
+                        <th>Price</th>
+                        <th>Bedrooms</th>
+                        <th>Area</th>
+                    </tr>
+                </thead>
+
+                <tbody id="comparisonBody">
+                    <tr>
+                        <td colspan="6">
+                            Select properties above to compare them.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <br>
+
+        <button class="btn" onclick="clearComparison()">
+            Clear Comparison
+        </button>
+
+    </section>
+
+    <!-- Property Details Modal -->
+    <div class="modal" id="detailsModal"
+         onclick="closeModalOutside(event)">
+
+        <div class="modal-content">
+
+            <button class="close-btn"
+                onclick="closeDetails()">
+                &times;
+            </button>
+
+            <h2 id="modalTitle">Property Details</h2>
+
+            <div id="modalBody"></div>
+
+        </div>
+
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+
+        <h2 class="section-title">Contact DreamHomes</h2>
+
+        <p>Looking for your dream home? Get in touch with us.</p>
+
+        <p>📍 Vijayawada, Andhra Pradesh, India</p>
+
+        <p>📞 +91 98765 43210</p>
+
+        <p>✉️ dreamhomes@example.com</p>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+
+        <h2>🏡 DreamHomes</h2>
+
+        <p>Find a place where your dreams feel at home.</p>
+
+        <p>© 2026 DreamHomes. All rights reserved.</p>
+
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+
+        // Property information
+        const properties = [
+            {
+                id: 1,
+                name: "Luxury Independent House",
+                type: "House",
+                location: "Benz Circle, Vijayawada",
+                price: 8500000,
+                bedrooms: 3,
+                bathrooms: 3,
+                area: "2,000 sq.ft.",
+                amenities: "Parking, Garden, Balcony, Security",
+                description:
+                    "A spacious independent house suitable for families."
+            },
+            {
+                id: 2,
+                name: "Modern Family Apartment",
+                type: "Apartment",
+                location: "Brodipet, Guntur",
+                price: 6200000,
+                bedrooms: 3,
+                bathrooms: 2,
+                area: "1,500 sq.ft.",
+                amenities: "Lift, Gym, Parking, Security",
+                description:
+                    "A modern apartment with convenient facilities."
+            },
+            {
+                id: 3,
+                name: "Comfortable City Apartment",
+                type: "Rental",
+                location: "Patamata, Vijayawada",
+                price: 18000,
+                bedrooms: 2,
+                bathrooms: 2,
+                area: "1,100 sq.ft.",
+                amenities: "Furnished, Balcony, Water, Parking",
+                description:
+                    "A comfortable rental apartment for city living."
+            },
+            {
+                id: 4,
+                name: "Premium Family Villa",
+                type: "House",
+                location: "Kanuru, Vijayawada",
+                price: 12500000,
+                bedrooms: 4,
+                bathrooms: 4,
+                area: "2,800 sq.ft.",
+                amenities: "Garden, Parking, Terrace, Security",
+                description:
+                    "A premium villa with spacious rooms and a garden."
+            },
+            {
+                id: 5,
+                name: "Compact Studio Apartment",
+                type: "Rental",
+                location: "Arundelpet, Guntur",
+                price: 12000,
+                bedrooms: 1,
+                bathrooms: 1,
+                area: "650 sq.ft.",
+                amenities: "Furnished, Wi-Fi, Security",
+                description:
+                    "An affordable rental option for individuals."
+            },
+            {
+                id: 6,
+                name: "Contemporary City Apartment",
+                type: "Apartment",
+                location: "Poranki, Vijayawada",
+                price: 4500000,
+                bedrooms: 2,
+                bathrooms: 2,
+                area: "1,200 sq.ft.",
+                amenities: "Lift, Balcony, Parking, CCTV",
+                description:
+                    "A contemporary apartment with essential amenities."
+            }
+        ];
+
+        let comparedProperties = [];
+        let favoriteProperties = [];
+
+        // Format property price
+        function formatPrice(property) {
+            return property.type === "Rental"
+                ? "₹" + property.price.toLocaleString("en-IN") + "/month"
+                : "₹" + property.price.toLocaleString("en-IN");
+        }
+
+        // Search and filter properties
+        function filterProperties() {
+
+            const location =
+                document.getElementById("searchLocation")
+                    .value.trim().toLowerCase();
+
+            const type =
+                document.getElementById("propertyType").value;
+
+            const minPrice =
+                document.getElementById("minPrice").value;
+
+            const maxPrice =
+                document.getElementById("maxPrice").value;
+
+            const bedrooms =
+                document.getElementById("bedrooms").value;
+
+            let visibleCount = 0;
+
+            document.querySelectorAll(".property-card")
+                .forEach(function(card) {
+
+                    const cardLocation =
+                        card.dataset.location;
+
+                    const cardType =
+                        card.dataset.type;
+
+                    const cardPrice =
+                        Number(card.dataset.price);
+
+                    const cardBedrooms =
+                        Number(card.dataset.bedrooms);
+
+                    const matchesLocation =
+                        cardLocation.includes(location);
+
+                    const matchesType =
+                        type === "all" || cardType === type;
+
+                    const matchesMin =
+                        minPrice === "" ||
+                        cardPrice >= Number(minPrice);
+
+                    const matchesMax =
+                        maxPrice === "" ||
+                        cardPrice <= Number(maxPrice);
+
+                    const matchesBedrooms =
+                        bedrooms === "all" ||
+                        cardBedrooms >= Number(bedrooms);
+
+                    const matches =
+                        matchesLocation &&
+                        matchesType &&
+                        matchesMin &&
+                        matchesMax &&
+                        matchesBedrooms;
+
+                    card.style.display =
+                        matches ? "block" : "none";
+
+                    if (matches) {
+                        visibleCount++;
+                    }
+
+                });
+
+            document.getElementById("resultCount").textContent =
+                visibleCount + " properties found";
+        }
+
+        // Reset all filters
+        function resetFilters() {
+
+            document.getElementById("searchLocation").value = "";
+            document.getElementById("propertyType").value = "all";
+            document.getElementById("minPrice").value = "";
+            document.getElementById("maxPrice").value = "";
+            document.getElementById("bedrooms").value = "all";
+
+            document.querySelectorAll(".property-card")
+                .forEach(function(card) {
+                    card.style.display = "block";
+                });
+
+            document.getElementById("resultCount").textContent =
+                "Showing all properties";
+        }
+
+        // Show property details
+        function showDetails(id) {
+
+            const property =
+                properties.find(item => item.id === id);
+
+            if (!property) return;
+
+            document.getElementById("modalTitle").textContent =
+                property.name;
+
+            document.getElementById("modalBody").innerHTML = `
+                <p><strong>Type:</strong> ${property.type}</p>
+
+                <p><strong>Location:</strong>
+                    ${property.location}</p>
+
+                <p><strong>Price:</strong>
+                    ${formatPrice(property)}</p>
+
+                <p><strong>Bedrooms:</strong>
+                    ${property.bedrooms}</p>
+
+                <p><strong>Bathrooms:</strong>
+                    ${property.bathrooms}</p>
+
+                <p><strong>Area:</strong>
+                    ${property.area}</p>
+
+                <p><strong>Amenities:</strong>
+                    ${property.amenities}</p>
+
+                <p><strong>Description:</strong>
+                    ${property.description}</p>
+            `;
+
+            document.getElementById("detailsModal")
+                .style.display = "block";
+        }
+
+        // Close property details
+        function closeDetails() {
+            document.getElementById("detailsModal")
+                .style.display = "none";
+        }
+
+        function closeModalOutside(event) {
+            if (event.target.id === "detailsModal") {
+                closeDetails();
+            }
+        }
+
+        // Add or remove a property from comparison
+        function toggleCompare(id) {
+
+            if (comparedProperties.includes(id)) {
+
+                comparedProperties =
+                    comparedProperties.filter(item => item !== id);
+
+            } else {
+
+                if (comparedProperties.length >= 3) {
+                    alert("You can compare up to 3 properties.");
+                    return;
+                }
+
+                comparedProperties.push(id);
+            }
+
+            updateComparison();
+        }
+
+        // Update comparison table
+        function updateComparison() {
+
+            const body =
+                document.getElementById("comparisonBody");
+
+            if (comparedProperties.length === 0) {
+
+                body.innerHTML = `
+                    <tr>
+                        <td colspan="6">
+                            Select properties above to compare them.
+                        </td>
+                    </tr>
+                `;
+
+                return;
+            }
+
+            body.innerHTML = comparedProperties.map(function(id) {
+
+                const property =
+                    properties.find(item => item.id === id);
+
+                return `
+                    <tr>
+                        <td>${property.name}</td>
+                        <td>${property.location}</td>
+                        <td>${property.type}</td>
+                        <td>${formatPrice(property)}</td>
+                        <td>${property.bedrooms}</td>
+                        <td>${property.area}</td>
+                    </tr>
+                `;
+
+            }).join("");
+        }
+
+        // Clear comparison
+        function clearComparison() {
+            comparedProperties = [];
+            updateComparison();
+        }
+
+        // Save favorite properties
+        function toggleFavorite(id, button) {
+
+            if (favoriteProperties.includes(id)) {
+
+                favoriteProperties =
+                    favoriteProperties.filter(item => item !== id);
+
+                button.textContent = "♡";
+
+            } else {
+
+                favoriteProperties.push(id);
+                button.textContent = "♥";
+            }
+        }
+
+    </script>
+
+</body>
+</html>
+``` 
